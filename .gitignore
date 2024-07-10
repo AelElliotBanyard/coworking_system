@@ -1,33 +1,33 @@
-HELP.md
-target/
-!.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
+coworking-system/HELP.md
+coworking-system/target/
+!coworking-system/.mvn/wrapper/maven-wrapper.jar
+!coworking-system/**/src/main/**/target/
+!coworking-system/**/src/test/**/target/
 
 ### STS ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
+coworking-system/.apt_generated
+coworking-system/.classpath
+coworking-system/.factorypath
+coworking-system/.project
+coworking-system/.settings
+coworking-system/.springBeans
+coworking-system/.sts4-cache
 
 ### IntelliJ IDEA ###
-.idea
-*.iws
-*.iml
-*.ipr
+coworking-system/.idea
+coworking-system/*.iws
+coworking-system/*.iml
+coworking-system/*.ipr
 
 ### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-build/
-!**/src/main/**/build/
-!**/src/test/**/build/
+coworking-system/nbproject/private/
+coworking-system//nbbuild/
+coworking-system//dist/
+coworking-system//nbdist/
+coworking-system//.nb-gradle/
+coworking-system/build/
+!coworking-system/**/src/main/**/build/
+!coworking-system/**/src/test/**/build/
 
 ### VS Code ###
-.vscode/
+coworking-system/.vscode/
