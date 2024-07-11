@@ -32,7 +32,15 @@ public class CoworkingUser {
 
 	private Boolean blocked;
 
-	@NotBlank
 	private Roles role;
+
+	public CoworkingUser(String username, String password, String firstName, String lastName, Boolean blocked, Roles role) {
+		this.username = username;
+		this.password = password;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.blocked = blocked;
+		this.role = role;
+	}
 
 }

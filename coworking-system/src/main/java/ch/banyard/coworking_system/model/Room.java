@@ -28,12 +28,18 @@ public class Room {
 	@NotBlank
 	private String shortName;
 
-	@NotBlank
 	private Integer floor;
 
-	@NotBlank
 	private RoomType type;
 
-	@NotBlank
 	private Integer capacity;
+
+	public Room(String name, String description, String shortName, Integer floor, RoomType type, Integer capacity) {
+		this.name = name;
+		this.description = description;
+		this.shortName = shortName;
+		this.floor = floor;
+		this.type = type;
+		this.capacity = capacity;
+	}
 }
