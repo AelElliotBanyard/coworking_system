@@ -33,9 +33,9 @@ public class RoomController {
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<RoomDTO> getRoom(@PathVariable Long id) {
+	public ResponseEntity<RoomDTO> getRoom(@PathVariable String id) {
 		try {
-			RoomDTO room = roomService.getRoomById(id);
+			RoomDTO room = roomService.getRoomById(Long.valueOf(id));
 			return ResponseEntity
 					.status(HttpStatus.OK)
 					.contentType(MediaType.APPLICATION_JSON)
@@ -69,14 +69,14 @@ public class RoomController {
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<RoomDTO> updateRoom(@PathVariable Long id, @RequestBody @Valid RoomDTO roomDTO, @AuthenticationPrincipal CoworkingUser coworkingUser) {
+	public ResponseEntity<RoomDTO> updateRoom(@PathVariable String id, @RequestBody @Valid RoomDTO roomDTO, @AuthenticationPrincipal CoworkingUser coworkingUser) {
 		try {
 			if (coworkingUser.getRole() != Roles.ADMIN) {
 				return ResponseEntity
 						.status(HttpStatus.FORBIDDEN)
 						.build();
 			}
-			RoomDTO room = roomService.updateRoom(id, roomDTO);
+			RoomDTO room = roomService.updateRoom(Long.valueOf(id), roomDTO);
 			return ResponseEntity
 					.status(HttpStatus.OK)
 					.contentType(MediaType.APPLICATION_JSON)
@@ -89,14 +89,14 @@ public class RoomController {
 	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Void> deleteRoom(@PathVariable Long id, @AuthenticationPrincipal CoworkingUser coworkingUser) {
+	public ResponseEntity<Void> deleteRoom(@PathVariable String id, @AuthenticationPrincipal CoworkingUser coworkingUser) {
 		try {
 			if (coworkingUser.getRole() != Roles.ADMIN) {
 				return ResponseEntity
 						.status(HttpStatus.FORBIDDEN)
 						.build();
 			}
-			roomService.deleteRoom(id);
+			roomService.deleteRoom(Long.valueOf(id));
 			return ResponseEntity
 					.status(HttpStatus.NO_CONTENT)
 					.build();

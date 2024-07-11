@@ -33,9 +33,9 @@ public class BookingController {
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<BookingDTO> getBooking(Long id) {
+	public ResponseEntity<BookingDTO> getBooking(@PathVariable String id) {
 		try {
-			BookingDTO booking = bookingService.getBookingById(id);
+			BookingDTO booking = bookingService.getBookingById(Long.valueOf(id));
 			return ResponseEntity
 					.status(HttpStatus.OK)
 					.contentType(MediaType.APPLICATION_JSON)
@@ -63,14 +63,14 @@ public class BookingController {
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<BookingDTO> updateBooking(@PathVariable Long id, @RequestBody BookingDTO bookingDTO, @AuthenticationPrincipal CoworkingUser coworkingUser) {
+	public ResponseEntity<BookingDTO> updateBooking(@PathVariable String id, @RequestBody BookingDTO bookingDTO, @AuthenticationPrincipal CoworkingUser coworkingUser) {
 		try {
 			if (coworkingUser.getRole() != Roles.ADMIN) {
 				return ResponseEntity
 						.status(HttpStatus.FORBIDDEN)
 						.build();
 			}
-			BookingDTO booking = bookingService.updateBooking(id, bookingDTO);
+			BookingDTO booking = bookingService.updateBooking(Long.valueOf(id), bookingDTO);
 			return ResponseEntity
 					.status(HttpStatus.OK)
 					.contentType(MediaType.APPLICATION_JSON)
@@ -83,14 +83,14 @@ public class BookingController {
 	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Void> deleteBooking(@PathVariable Long id, @AuthenticationPrincipal CoworkingUser coworkingUser) {
+	public ResponseEntity<Void> deleteBooking(@PathVariable String id, @AuthenticationPrincipal CoworkingUser coworkingUser) {
 		try {
 			if (coworkingUser.getRole() != Roles.ADMIN) {
 				return ResponseEntity
 						.status(HttpStatus.FORBIDDEN)
 						.build();
 			}
-			bookingService.deleteBooking(id);
+			bookingService.deleteBooking(Long.valueOf(id));
 			return ResponseEntity
 					.status(HttpStatus.OK)
 					.build();
