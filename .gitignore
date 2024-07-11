@@ -31,3 +31,5 @@ coworking-system/build/
 
 ### VS Code ###
 coworking-system/.vscode/
+
+/database/database
