@@ -11,6 +11,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/bookings")
@@ -65,9 +66,12 @@ public class BookingController {
 	public ResponseEntity<BookingDTO> updateBooking(@PathVariable String id, @RequestBody BookingDTO bookingDTO, @AuthenticationPrincipal CoworkingUser coworkingUser) {
 		try {
 			if (coworkingUser.getRole() != Roles.ADMIN) {
-				return ResponseEntity
-						.status(HttpStatus.FORBIDDEN)
-						.build();
+				if (!Objects.equals(bookingService.getBookingById(Long.valueOf(id)).coworkingUserDTO().id(), coworkingUser.getId()))
+				{
+					return ResponseEntity
+							.status(HttpStatus.FORBIDDEN)
+							.build();
+				}
 			}
 			BookingDTO booking = bookingService.updateBooking(Long.valueOf(id), bookingDTO);
 			return ResponseEntity
@@ -85,9 +89,12 @@ public class BookingController {
 	public ResponseEntity<Void> deleteBooking(@PathVariable String id, @AuthenticationPrincipal CoworkingUser coworkingUser) {
 		try {
 			if (coworkingUser.getRole() != Roles.ADMIN) {
-				return ResponseEntity
-						.status(HttpStatus.FORBIDDEN)
-						.build();
+				if (!Objects.equals(bookingService.getBookingById(Long.valueOf(id)).coworkingUserDTO().id(), coworkingUser.getId()))
+				{
+					return ResponseEntity
+							.status(HttpStatus.FORBIDDEN)
+							.build();
+				}
 			}
 			bookingService.deleteBooking(Long.valueOf(id));
 			return ResponseEntity
