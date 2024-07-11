@@ -3,7 +3,6 @@ package ch.banyard.coworking_system.service;
 import ch.banyard.coworking_system.model.Booking;
 import ch.banyard.coworking_system.model.CoworkingUser;
 import ch.banyard.coworking_system.model.dto.BookingDTO;
-import ch.banyard.coworking_system.model.dto.CoworkingUserDTO;
 import ch.banyard.coworking_system.model.mapper.BookingMapper;
 import ch.banyard.coworking_system.repository.BookingRepository;
 import org.springframework.stereotype.Service;

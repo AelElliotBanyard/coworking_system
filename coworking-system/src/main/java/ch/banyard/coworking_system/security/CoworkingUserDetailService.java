@@ -9,6 +9,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class CoworkingUserDetailService implements UserDetailsService {
 	private UserRepository userRepository;
@@ -20,17 +22,17 @@ public class CoworkingUserDetailService implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		final CoworkingUser coworkingUser = userRepository.findOneByUsername(username).get();
+		CoworkingUser coworkingUser = userRepository.findOneByUsername(username).get();
 		if (coworkingUser == null) {
 			throw new UsernameNotFoundException(username);
+		} else {
+			return User
+					.withUsername(coworkingUser.getUsername())
+					.password(coworkingUser.getPassword())
+					.roles(String.valueOf(coworkingUser.getRole()))
+					.build();
 		}
-		UserDetails user = User
-				.withUsername(coworkingUser.getUsername())
-				.password(coworkingUser.getPassword())
-				.roles(String.valueOf(coworkingUser.getRole()))
-				.build();
 
-		return user;
 	}
 
 }

@@ -1,6 +1,5 @@
 package ch.banyard.coworking_system.controller;
 
-import ch.banyard.coworking_system.model.Booking;
 import ch.banyard.coworking_system.model.CoworkingUser;
 import ch.banyard.coworking_system.model.dto.BookingDTO;
 import ch.banyard.coworking_system.model.enums.Roles;

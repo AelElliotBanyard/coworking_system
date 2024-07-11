@@ -1,6 +1,5 @@
 package ch.banyard.coworking_system.model.mapper;
 
-import ch.banyard.coworking_system.model.Booking;
 import ch.banyard.coworking_system.model.CoworkingUser;
 import ch.banyard.coworking_system.model.dto.CoworkingUserDTO;
 import org.springframework.stereotype.Component;

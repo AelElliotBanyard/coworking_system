@@ -3,7 +3,6 @@ package ch.banyard.coworking_system.service;
 import ch.banyard.coworking_system.model.dto.CoworkingUserDTO;
 import ch.banyard.coworking_system.model.mapper.CoworkingUserMapper;
 import ch.banyard.coworking_system.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

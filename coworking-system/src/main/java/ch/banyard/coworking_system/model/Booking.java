@@ -15,6 +15,7 @@ import java.sql.Date;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "booking")
 public class Booking {
 
 	@Id

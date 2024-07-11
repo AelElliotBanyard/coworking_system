@@ -1,10 +1,7 @@
 package ch.banyard.coworking_system.model;
 
 import ch.banyard.coworking_system.model.enums.Roles;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
@@ -14,6 +11,7 @@ import lombok.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "coworking_user")
 public class CoworkingUser {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
