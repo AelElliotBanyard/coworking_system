@@ -1,0 +1,28 @@
+version: "3.1"
+services:
+  db:
+    image: mariadb
+    container_name: m223_db
+    ports:
+      - 3306:3306
+    expose:
+      - '3306'
+    environment:
+      MYSQL_ROOT_PASSWORD: bbw123
+    volumes:
+      - ./database:/var/lib/mysql
+  phpmyadmin:
+    depends_on:
+      - db
+    image: phpmyadmin/phpmyadmin
+    container_name: m223_phpmyadmin
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST=db
+    restart: always
+    ports:
+      - 80:80
+    volumes:
+      - /sessions
+    links:
+      - db
