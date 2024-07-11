@@ -8,7 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
+import java.sql.Date;
 
 @Entity
 @Getter
@@ -21,7 +21,7 @@ public class Booking {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-	private LocalDateTime date;
+	private Date date;
 
 	private Day day;
 
@@ -29,10 +29,18 @@ public class Booking {
 
 	@JoinColumn(name = "user_id", referencedColumnName = "id")
 	@ManyToOne
-	private User user;
+	private CoworkingUser coworkingUser;
 
 	@JoinColumn(name = "room_id", referencedColumnName = "id")
 	@ManyToOne
 	private Room room;
+
+	public Booking(Date date, Day day, Status status, CoworkingUser coworkingUser, Room room) {
+		this.date = date;
+		this.day = day;
+		this.status = status;
+		this.coworkingUser = coworkingUser;
+		this.room = room;
+	}
 
 }
