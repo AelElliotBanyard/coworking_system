@@ -4,6 +4,14 @@ import ch.banyard.coworking_system.model.CoworkingUser;
 import ch.banyard.coworking_system.model.dto.RoomDTO;
 import ch.banyard.coworking_system.model.enums.Roles;
 import ch.banyard.coworking_system.service.RoomService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -15,6 +23,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/rooms")
+@Tag(name = "Room", description = "Room API")
 public class RoomController {
 
 	private final RoomService roomService;
@@ -24,6 +33,14 @@ public class RoomController {
 	}
 
 	@GetMapping
+	@Operation(summary = "Get all rooms")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Rooms found",
+					content = { @Content(mediaType = "application/json",
+					array = @ArraySchema( schema = @Schema(implementation = RoomDTO.class)))}),
+			@ApiResponse(responseCode = "404", description = "Rooms not found",
+					content = @Content)
+	})
 	public ResponseEntity<List<RoomDTO>> getRooms() {
 		List<RoomDTO> rooms = roomService.getAllRooms();
 		return ResponseEntity
@@ -33,7 +50,17 @@ public class RoomController {
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<RoomDTO> getRoom(@PathVariable String id) {
+	@Operation(summary = "Get room by id")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Room found",
+					content = { @Content(mediaType = "application/json",
+					schema = @Schema(implementation = RoomDTO.class)) }),
+			@ApiResponse(responseCode = "404", description = "Room not found",
+					content = @Content),
+			@ApiResponse(responseCode = "403", description = "Forbidden",
+					content = @Content)
+	})
+	public ResponseEntity<RoomDTO> getRoom(@Parameter(description = "id of Room to get") @PathVariable String id) {
 		try {
 			RoomDTO room = roomService.getRoomById(Long.valueOf(id));
 			return ResponseEntity
@@ -49,7 +76,17 @@ public class RoomController {
 
 
 	@PostMapping
-	public ResponseEntity<RoomDTO> createRoom(@RequestBody @Valid RoomDTO roomDTO, @AuthenticationPrincipal CoworkingUser coworkingUser) {
+	@Operation(summary = "Create room")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "201", description = "Room created",
+					content = { @Content(mediaType = "application/json",
+					schema = @Schema(implementation = RoomDTO.class)) }),
+			@ApiResponse(responseCode = "409", description = "Room already exists",
+					content = @Content),
+			@ApiResponse(responseCode = "403", description = "Forbidden",
+					content = @Content)
+	})
+	public ResponseEntity<RoomDTO> createRoom(@io.swagger.v3.oas.annotations.parameters.RequestBody(description = "new room") @RequestBody @Valid RoomDTO roomDTO, @AuthenticationPrincipal CoworkingUser coworkingUser) {
 		try {
 			if (coworkingUser.getRole() != Roles.ADMIN) {
 				return ResponseEntity
@@ -69,7 +106,17 @@ public class RoomController {
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<RoomDTO> updateRoom(@PathVariable String id, @RequestBody @Valid RoomDTO roomDTO, @AuthenticationPrincipal CoworkingUser coworkingUser) {
+	@Operation(summary = "Update room")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Room updated",
+					content = { @Content(mediaType = "application/json",
+					schema = @Schema(implementation = RoomDTO.class)) }),
+			@ApiResponse(responseCode = "404", description = "Room not found",
+					content = @Content),
+			@ApiResponse(responseCode = "403", description = "Forbidden",
+					content = @Content)
+	})
+	public ResponseEntity<RoomDTO> updateRoom( @Parameter(description = "id of room to update") @PathVariable String id, @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "room to update") @RequestBody @Valid RoomDTO roomDTO, @AuthenticationPrincipal CoworkingUser coworkingUser) {
 		try {
 			if (coworkingUser.getRole() != Roles.ADMIN) {
 				return ResponseEntity
@@ -89,7 +136,16 @@ public class RoomController {
 	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Void> deleteRoom(@PathVariable String id, @AuthenticationPrincipal CoworkingUser coworkingUser) {
+	@Operation(summary = "Delete room")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "204", description = "Room deleted",
+					content = @Content),
+			@ApiResponse(responseCode = "404", description = "Room not found",
+					content = @Content),
+			@ApiResponse(responseCode = "403", description = "Forbidden",
+					content = @Content)
+	})
+	public ResponseEntity<Void> deleteRoom(@Parameter(description = "id of room to delete") @PathVariable String id, @AuthenticationPrincipal CoworkingUser coworkingUser) {
 		try {
 			if (coworkingUser.getRole() != Roles.ADMIN) {
 				return ResponseEntity

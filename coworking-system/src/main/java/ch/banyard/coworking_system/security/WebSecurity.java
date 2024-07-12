@@ -70,13 +70,16 @@ public class WebSecurity {
 								authorize
 										.requestMatchers(HttpMethod.POST, SIGN_UP_URL)
 										.permitAll()
+										.requestMatchers(HttpMethod.GET, "/swagger-ui/**")
+										.permitAll()
+										.requestMatchers(HttpMethod.GET, "/v3/api-docs/**")
+										.permitAll()
+										.requestMatchers(HttpMethod.GET, "/swagger")
+										.permitAll()
 										.anyRequest()
 										.authenticated()
-				).formLogin(formLogin ->
-						formLogin
-								.loginPage("/users/login")
-								.permitAll()
-				).cors(AbstractHttpConfigurer::disable)
+				)
+				.cors(AbstractHttpConfigurer::disable)
 				.csrf(AbstractHttpConfigurer::disable);
 
 		http.addFilterBefore(customFilter(), UsernamePasswordAuthenticationFilter.class);
