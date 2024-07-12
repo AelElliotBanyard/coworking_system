@@ -22,7 +22,10 @@ public class CoworkingUserDetailService implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		CoworkingUser coworkingUser = userRepository.findOneByUsername(username).get();
+		if (userRepository.findCoworkingUserByUsername(username).isEmpty()) {
+			throw new UsernameNotFoundException(username);
+		}
+		CoworkingUser coworkingUser = userRepository.findCoworkingUserByUsername(username).get();
 		if (coworkingUser == null) {
 			throw new UsernameNotFoundException(username);
 		} else {

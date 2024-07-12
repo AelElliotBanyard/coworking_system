@@ -14,6 +14,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.util.Assert;
 
@@ -70,11 +71,11 @@ static Logger log = Logger.getLogger("JwtAuthenticationFilter");
 	                                        FilterChain chain,
 	                                        Authentication auth) throws IOException, ServletException {
 		log.info("successfulAuthentication");
-		CoworkingUser coworkingUser = ((CoworkingUser) auth.getPrincipal());
-		log.info("user : " + coworkingUser.toString());
+		User user = ((User) auth.getPrincipal());
+		log.info("user : " + user.toString());
 
 		String token = JWT.create()
-				.withSubject(((CoworkingUser) auth.getPrincipal()).getUsername())
+				.withSubject(((User) auth.getPrincipal()).getUsername())
 				.withExpiresAt(new Date(System.currentTimeMillis() + JWT_TOKEN_VALIDITY))
 				.sign(HMAC512(SECRET.getBytes()));
 		// token in body
