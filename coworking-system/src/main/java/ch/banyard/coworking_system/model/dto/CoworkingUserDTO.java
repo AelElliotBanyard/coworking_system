@@ -11,5 +11,6 @@ public record CoworkingUserDTO(
 		String firstName,
 		String lastName,
 		Boolean blocked,
-		Roles role) {
+		Roles role,
+		String salt) {
 }

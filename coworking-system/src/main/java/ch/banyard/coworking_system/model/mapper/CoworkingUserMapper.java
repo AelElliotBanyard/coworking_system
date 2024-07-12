@@ -15,10 +15,15 @@ public class CoworkingUserMapper {
 		coworkingUser.setId(userDTO.id());
 		coworkingUser.setUsername(userDTO.username());
 		coworkingUser.setPassword(userDTO.password());
+		coworkingUser.setFirstName(userDTO.firstName());
+		coworkingUser.setLastName(userDTO.lastName());
+		coworkingUser.setBlocked(userDTO.blocked());
+		coworkingUser.setRole(userDTO.role());
+		coworkingUser.setSalt(userDTO.salt());
 		return coworkingUser;
 	}
 	public CoworkingUserDTO mapUserToDTO(CoworkingUser coworkingUser) {
-		return new CoworkingUserDTO(coworkingUser.getId(), coworkingUser.getUsername(), coworkingUser.getPassword(),coworkingUser.getFirstName(),coworkingUser.getLastName(), coworkingUser.getBlocked(), coworkingUser.getRole());
+		return new CoworkingUserDTO(coworkingUser.getId(), coworkingUser.getUsername(), coworkingUser.getPassword(),coworkingUser.getFirstName(),coworkingUser.getLastName(), coworkingUser.getBlocked(), coworkingUser.getRole(), coworkingUser.getSalt());
 	}
 
 	public List<CoworkingUserDTO> mapUsersToDtoList(List<CoworkingUser> users) {

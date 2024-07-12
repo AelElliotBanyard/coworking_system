@@ -34,13 +34,16 @@ public class CoworkingUser {
 
 	private Roles role;
 
-	public CoworkingUser(String username, String password, String firstName, String lastName, Boolean blocked, Roles role) {
+	private String salt;
+
+	public CoworkingUser(String username, String password, String firstName, String lastName, Boolean blocked, Roles role, String salt) {
 		this.username = username;
 		this.password = password;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.blocked = blocked;
 		this.role = role;
+		this.salt = salt;
 	}
 
 }
