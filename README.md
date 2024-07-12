@@ -167,24 +167,6 @@ Schnittstellenplanung von Coworking System API
       </td>
     </tr>
     <tr>
-      <td>PATCH</td>
-      <td>/rooms/{id}</td>
-      <td>
-        <p>Erfolge:</p>
-        <ul>
-          <li>200 Raum aktualisiert</li>
-        </ul>
-        <p>Fehlerfall:</p>
-        <ul>
-          <li>400 Bad Request</li>
-          <li>401 Unauthorized</li>
-          <li>403 Forbidden</li>
-          <li>404 Not Found</li>
-          <li>500 Internal Server Error</li>
-        </ul>
-      </td>
-    </tr>
-    <tr>
       <td>DELETE</td>
       <td>/rooms/{id}</td>
       <td>
@@ -257,24 +239,6 @@ Schnittstellenplanung von Coworking System API
     </tr>
     <tr>
       <td>PUT</td>
-      <td>/bookings/{id}</td>
-      <td>
-        <p>Erfolge:</p>
-        <ul>
-          <li>200 Buchung aktualisiert</li>
-        </ul>
-        <p>Fehlerfall:</p>
-        <ul>
-          <li>400 Bad Request</li>
-          <li>401 Unauthorized</li>
-          <li>403 Forbidden</li>
-          <li>404 Not Found</li>
-          <li>500 Internal Server Error</li>
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td>PATCH</td>
       <td>/bookings/{id}</td>
       <td>
         <p>Erfolge:</p>
@@ -409,24 +373,6 @@ Schnittstellenplanung von Coworking System API
       </td>
     </tr>
     <tr>
-      <td>PATCH</td>
-      <td>/users/{id}</td>
-      <td>
-        <p>Erfolge:</p>
-        <ul>
-          <li>200 Benutzer aktualisiert</li>
-        </ul>
-        <p>Fehlerfall:</p>
-        <ul>
-          <li>400 Bad Request</li>
-          <li>401 Unauthorized</li>
-          <li>403 Forbidden</li>
-          <li>404 Not Found</li>
-          <li>500 Internal Server Error</li>
-        </ul>
-      </td>
-    </tr>
-    <tr>
       <td>DELETE</td>
       <td>/users/{id}</td>
       <td>
@@ -453,4 +399,24 @@ Schnittstellenplanung von Coworking System API
 
 ## Testdaten
 
-TODO
+```java
+	String salt = BCrypt.gensalt();
+	CoworkingUser u1 = new CoworkingUser("ael@banyard.ch", BCrypt.hashpw("123", salt), "ael", "banyard", false, Roles.ADMIN, salt);
+	CoworkingUser u2 = new CoworkingUser("en.lueber@gmail.com", BCrypt.hashpw("123", salt), "evan", "lueber", false, Roles.MEMBERsalt);
+
+
+	Room r1 = new Room("Room 1", "First Floor Room 1", "101", 1  , RoomType.CONFERENCE_ROOM, 20);
+	Room r2 = new Room("Room 2", "First Floor Room 2", "102", 1  , RoomType.WORKSPACE, 3);
+	Room r3 = new Room("Room 3", "First Floor Room 3", "103", 1  , RoomType.MEETING_ROOM, 10);
+	Room r4 = new Room("Room 4", "Second Floor Room 1", "201", 2  , RoomType.WORKSPACE, 3);
+
+
+	Booking b1 = new Booking(Date.valueOf("2024-10-11"), Day.HALF_DAY_MORNING, Status.REQUESTED, u1, r1, "ael1");
+	Booking b2 = new Booking(Date.valueOf("2024-10-11"), Day.HALF_DAY_AFTERNOON, Status.REQUESTED, u2, r2, "evan1");
+	Booking b3 = new Booking(Date.valueOf("2024-10-11"), Day.FUll_DAY, Status.REQUESTED, u1, r3, "ael2");
+	Booking b4 = new Booking(Date.valueOf("2024-10-11"), Day.FUll_DAY, Status.REQUESTED, u2, r4, "evan2");
+```
+
+
+## Reflektion
+Das Projekt war eine gute Gelegenheit, um die Konzepte von Spring Boot und Spring Security zu vertiefen. Es war auch eine gute Gelegenheit, um die Verwendung von Docker und Docker Compose für die Bereitstellung von Anwendungen zu üben. Die Implementierung der REST-API und die Verwendung von JWT-Token für die Authentifizierung und Autorisierung waren besonders lehrreich. Insgesamt war es eine lohnende Erfahrung, die mir half, meine Fähigkeiten in der Entwicklung von Webanwendungen zu verbessern.
