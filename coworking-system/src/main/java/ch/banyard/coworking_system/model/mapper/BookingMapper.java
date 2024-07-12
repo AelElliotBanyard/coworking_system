@@ -23,10 +23,9 @@ public class BookingMapper {
 
 	}
 
-	public Booking mapsBookingDtoToEntity(BookingDTO bookingDTO) {
-		CoworkingUser coworkingUser = coworkingUserMapper.mapUserDtoToEntity(bookingDTO.coworkingUserDTO());
+	public Booking mapsBookingDtoToEntity(BookingDTO bookingDTO, CoworkingUser coworkingUser) {
 		Room room = roomMapper.mapRoomDtoToEntity(bookingDTO.roomDTO());
-		return new Booking(Date.valueOf(bookingDTO.date()), bookingDTO.day(), bookingDTO.status(), coworkingUser, room);
+		return new Booking(Date.valueOf(bookingDTO.date()), bookingDTO.day(), bookingDTO.status(), coworkingUser, room, bookingDTO.name() );
 	}
 
 	public BookingDTO mapBookingToDTO(Booking booking) {
@@ -34,6 +33,7 @@ public class BookingMapper {
 		RoomDTO roomDTO = roomMapper.mapRoomToDTO(booking.getRoom());
 		return BookingDTO.builder()
 				.id(booking.getId())
+				.name(booking.getName())
 				.coworkingUserDTO(userDTO)
 				.roomDTO(roomDTO)
 				.date(booking.getDate().toString())

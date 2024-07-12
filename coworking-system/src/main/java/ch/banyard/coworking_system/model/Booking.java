@@ -3,6 +3,7 @@ package ch.banyard.coworking_system.model;
 import ch.banyard.coworking_system.model.enums.Day;
 import ch.banyard.coworking_system.model.enums.Status;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,6 +22,7 @@ public class Booking {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	private String name;
 
 	private Date date;
 
@@ -36,12 +38,13 @@ public class Booking {
 	@ManyToOne
 	private Room room;
 
-	public Booking(Date date, Day day, Status status, CoworkingUser coworkingUser, Room room) {
+	public Booking(Date date, Day day, Status status, CoworkingUser coworkingUser, Room room, String name) {
 		this.date = date;
 		this.day = day;
 		this.status = status;
 		this.coworkingUser = coworkingUser;
 		this.room = room;
+		this.name = name;
 	}
 
 }

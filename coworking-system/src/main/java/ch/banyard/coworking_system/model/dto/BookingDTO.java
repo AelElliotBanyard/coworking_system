@@ -7,6 +7,7 @@ import lombok.Builder;
 @Builder
 public record BookingDTO(
 		Long id,
+		String name,
 		String date,
 		Day day,
 		Status status,
