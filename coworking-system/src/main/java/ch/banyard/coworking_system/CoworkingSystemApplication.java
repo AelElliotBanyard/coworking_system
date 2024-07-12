@@ -34,8 +34,8 @@ public class CoworkingSystemApplication {
 		return (args) -> {
 			log.info("Coworking System Application started");
 			String salt = BCrypt.gensalt();
-			CoworkingUser u1 = new CoworkingUser("ael.banyard@banyard.ch", BCrypt.hashpw("123", salt), "ael", "banyard", false, Roles.ADMIN);
-			CoworkingUser u2 = new CoworkingUser("en.lueber@gmail.com", BCrypt.hashpw("123", salt), "evan", "lueber", false, Roles.MEMBER);
+			CoworkingUser u1 = new CoworkingUser("ael@banyard.ch", BCrypt.hashpw("123", salt), "ael", "banyard", false, Roles.ADMIN, salt);
+			CoworkingUser u2 = new CoworkingUser("en.lueber@gmail.com", BCrypt.hashpw("123", salt), "evan", "lueber", false, Roles.MEMBER, salt);
 			userRepository.save(u1);
 			userRepository.save(u2);
 			log.info("Users found with findAll():");
@@ -58,10 +58,10 @@ public class CoworkingSystemApplication {
 				log.info(room.toString());
 			}
 
-			Booking b1 = new Booking(Date.valueOf("2024-10-11"), Day.HALF_DAY_MORNING, Status.REQUESTED, u1, r1);
-			Booking b2 = new Booking(Date.valueOf("2024-10-11"), Day.HALF_DAY_AFTERNOON, Status.REQUESTED, u2, r2);
-			Booking b3 = new Booking(Date.valueOf("2024-10-11"), Day.FUll_DAY, Status.REQUESTED, u1, r3);
-			Booking b4 = new Booking(Date.valueOf("2024-10-11"), Day.FUll_DAY, Status.REQUESTED, u2, r4);
+			Booking b1 = new Booking(Date.valueOf("2024-10-11"), Day.HALF_DAY_MORNING, Status.REQUESTED, u1, r1, "ael1");
+			Booking b2 = new Booking(Date.valueOf("2024-10-11"), Day.HALF_DAY_AFTERNOON, Status.REQUESTED, u2, r2, "evan1");
+			Booking b3 = new Booking(Date.valueOf("2024-10-11"), Day.FUll_DAY, Status.REQUESTED, u1, r3, "ael2");
+			Booking b4 = new Booking(Date.valueOf("2024-10-11"), Day.FUll_DAY, Status.REQUESTED, u2, r4, "evan2");
 			bookingRepository.save(b1);
 			bookingRepository.save(b2);
 			bookingRepository.save(b3);
