@@ -1,22 +1,10 @@
 # Dokumentation für die LB B - Modul 223
 
+[Github Repository](https://github.com/AelElliotBanyard/coworking_system)
+
 ## Beschreibung
 
 Eine Webapplikation für die Verwaltung eines Coworking Spaces. Die Plattform ermöglicht es Mitgliedern und Administratoren, sich anzumelden, ihre persönlichen Daten zu verwalten, Reservierungen zu erstellen und zu bearbeiten, sowie Informationen über den Coworking Space zu erhalten.
-
-## Aufsetzung des Projekts
-
-### Voraussetzungen
-
-- Docker
-- Docker Compose
-- Java 22
-
-TODO
-
-## Starten des Projekts
-
-TODO
 
 ## Inhaltsverzeichnis
 
@@ -27,6 +15,71 @@ TODO
 5. [Schnittstellenplanung](#Schnittstellenplanung)
 6. [Sequenzdiagramm](#Sequenzdiagramm)
 7. [Testdaten](#Testdaten)
+
+<div style="page-break-after: always;"></div>
+
+## Aufsetzung des Projekts
+
+Um das Spring Boot Projekt einzurichten, folgen Sie bitte den nachstehenden Schritten:
+
+1. Öffnen Sie Ihre bevorzugte Entwicklungsumgebung (z.B. IntelliJ IDEA, Eclipse).
+2. Klonen Sie das GitHub-Repository auf Ihren lokalen Computer:
+
+```bash
+git clone https://github.com/AelElliotBanyard/coworking_system.git
+```
+
+3. Navigieren Sie zum Projektverzeichnis:
+
+```bash
+cd coworking_system
+```
+
+4. Öffnen Sie das Projekt in Ihrer Entwicklungsumgebung.
+5. Stellen Sie sicher, dass Sie eine Java Development Kit (JDK) Version 22 oder höher installiert haben.
+6. Konfigurieren Sie Ihre Datenbankverbindung in der Datei `application.properties` im Verzeichnis `src/main/resources`. Geben Sie den Datenbank-URL, den Benutzernamen und das Passwort an.
+7. Führen Sie die folgenden Befehle aus, um das Projekt zu kompilieren und die Abhängigkeiten herunterzuladen:
+
+```bash
+./mvnw clean install
+```
+
+8. Starten Sie die Anwendung mit dem folgenden Befehl:
+
+```bash
+./mvnw spring-boot:run
+```
+
+9. Die Anwendung sollte nun lokal auf Ihrem Computer gestartet werden. Sie können auf die API über den Endpunkt `http://localhost:8080` zugreifen.
+
+Bitte beachten Sie, dass Sie möglicherweise weitere Konfigurationsschritte durchführen müssen, je nach Ihren spezifischen Anforderungen und Umgebungen. Stellen Sie sicher, dass Sie die Dokumentation des Projekts überprüfen, um weitere Informationen zu erhalten.
+
+<div style="page-break-after: always;"></div>
+
+## Starten des Projekts
+
+Um das Projekt zu starten, führen Sie bitte die folgenden Schritte aus:
+
+1. Öffnen Sie Ihre bevorzugte Entwicklungsumgebung (z.B. IntelliJ IDEA, Eclipse).
+2. Navigieren Sie zum Projektverzeichnis:
+
+3. Stellen Sie sicher, dass Sie eine Java Development Kit (JDK) Version 22 oder höher installiert haben.
+4. Konfigurieren Sie Ihre Datenbankverbindung in der Datei `application.properties` im Verzeichnis `src/main/resources`. Geben Sie den Datenbank-URL, den Benutzernamen und das Passwort an.
+5. Führen Sie die folgenden Befehle aus, um das Projekt zu kompilieren und die Abhängigkeiten herunterzuladen:
+
+```bash
+./mvnw clean install
+```
+
+6. Starten Sie die Anwendung mit dem folgenden Befehl:
+
+```bash
+./mvnw spring-boot:run
+```
+
+7. Die Anwendung sollte nun lokal auf Ihrem Computer gestartet werden. Sie können auf die API über den Endpunkt `http://localhost:8080` zugreifen.
+
+Bitte beachten Sie, dass Sie möglicherweise weitere Konfigurationsschritte durchführen müssen, je nach Ihren spezifischen Anforderungen und Umgebungen. Stellen Sie sicher, dass Sie die Dokumentation des Projekts überprüfen, um weitere Informationen zu erhalten.
 
 ## Erweiterte Anforderungen
 
@@ -41,6 +94,8 @@ TODO
 1. Die Antwortzeit der Plattform soll unter 5 Sekunden liegen.
 2. Die Plattform soll mindestens 99% der Zeit verfügbar sein.
 3. Die Plattform soll dem Benutzer eine intuitive Benutzeroberfläche bieten.
+
+<div style="page-break-after: always;"></div>
 
 ## Persona
 
@@ -64,6 +119,8 @@ TODO
 
 <img src="./images/friedrich.jpeg" alt="Friedrich Meier" width="200" height="200"/>
 
+<div style="page-break-after: always;"></div>
+
 ### Persona 3: Besucher
 
 **Name:** Tom Weber  
@@ -74,13 +131,19 @@ TODO
 
 <img src="./images/tom.jpeg" alt="Tom Weber" width="200" height="200"/>
 
+<div style="page-break-after: always;"></div>
+
 ## Anwendungsfalldiagramm
 
 ![Anwendungsfalldiagramm](./images/use-case.png)
 
+<div style="page-break-after: always;"></div>
+
 ## Fachklassendiagramm
 
 ![Fachklassendiagramm](./images/fachklassen.png)
+
+<div style="page-break-after: always;"></div>
 
 ## Schnittstellenplanung
 
@@ -397,6 +460,8 @@ Schnittstellenplanung von Coworking System API
 
 ![Sequenzdiagramm](./images/sequenz.png)
 
+<div style="page-break-after: always;"></div>
+
 ## Testdaten
 
 ```java
@@ -417,6 +482,6 @@ Schnittstellenplanung von Coworking System API
 	Booking b4 = new Booking(Date.valueOf("2024-10-11"), Day.FUll_DAY, Status.REQUESTED, u2, r4, "evan2");
 ```
 
-
 ## Reflektion
+
 Das Projekt war eine gute Gelegenheit, um die Konzepte von Spring Boot und Spring Security zu vertiefen. Es war auch eine gute Gelegenheit, um die Verwendung von Docker und Docker Compose für die Bereitstellung von Anwendungen zu üben. Die Implementierung der REST-API und die Verwendung von JWT-Token für die Authentifizierung und Autorisierung waren besonders lehrreich. Insgesamt war es eine lohnende Erfahrung, die mir half, meine Fähigkeiten in der Entwicklung von Webanwendungen zu verbessern.
